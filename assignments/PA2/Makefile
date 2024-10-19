@@ -1,11 +1,11 @@
 
 ASSN = 2
-CLASS= cs143
+CLASS= compiladores
 CLASSDIR= /var/tmp/cool
-LIB= -lfl
+LIB= -L/usr/lib -lfl
 
 SRC= cool.flex test.cl README 
-CSRC= lextest.cc utilities.cc stringtab.cc handle_flags.cc 
+CSRC= lextest.cc utilities.cc stringtab.cc handle_flags.cc
 TSRC= mycoolc
 HSRC= 
 CGEN= cool-lex.cc
@@ -22,7 +22,7 @@ CPPINCLUDE= -I. -I${CLASSDIR}/include/PA${ASSN} -I${CLASSDIR}/src/PA${ASSN}
 FFLAGS= -d -ocool-lex.cc
 
 CC=g++
-CFLAGS= -g -Wall -Wno-unused -Wno-write-strings ${CPPINCLUDE}
+CFLAGS= -g -Wall -Wno-unused ${CPPINCLUDE}
 FLEX=flex ${FFLAGS}
 DEPEND = ${CC} -MM ${CPPINCLUDE}
 
@@ -78,4 +78,5 @@ clean-compile:
 	${SHELL} -ec '${DEPEND} $< | sed '\''s/\($*\.o\)[ :]*/\1 $@ : /g'\'' > $@'
 
 -include ${CFIL:.cc=.d}
+
 
